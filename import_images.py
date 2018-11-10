@@ -3,14 +3,17 @@ from PIL import Image
 
 # LOAD FILES AND MAKE IT AS NUMPY FILE
 import os
-dir_path = os.path.dirname(os.path.realpath(__file__))
-
 import glob
+
+# TWO LEVELS UP
+dir_path = os.path.normpath(os.path.join(__file__,'../../', 'Dataset'))
+#dir_path = os.path.dirname(os.path.realpath(__file__))
+
 filelist = [
-    glob.glob(dir_path + '/Figaro-1k/Original/Training' + '/*.jpg'),
-    glob.glob(dir_path + '/Figaro-1k/Original/Testing' + '/*.jpg'),
-    glob.glob(dir_path + '/Figaro-1k/GT/Training' + '/*.pbm'),
-    glob.glob(dir_path + '/Figaro-1k/GT/Testing' + '/*.pbm')
+    glob.glob(os.path.join(dir_path, "Figaro-1k", "Original", "Training", "*.jpg")),
+    glob.glob(os.path.join(dir_path, "Figaro-1k", "Original", "Test", "*.jpg")),
+    glob.glob(os.path.join(dir_path, "Figaro-1k", "GT", "Training", "*.pbm")),
+    glob.glob(os.path.join(dir_path, "Figaro-1k", "GT", "Test", "*.pbm"))
 ]
 
 x_train = np.array([np.array(Image.open(fname)) for fname in filelist[0]])
